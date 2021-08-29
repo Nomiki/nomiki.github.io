@@ -1,1 +1,25 @@
-<body>Hello World! <a href="cv">!</a></body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=1920, initial-scale=1.0" />
+
+    <script src="https://unpkg.com/showdown/dist/showdown.min.js"></script>
+
+    <title>Index</title>
+  </head>
+  <body>
+    <div id="body"></div>
+  </body>
+  <script>
+    var converter = new showdown.Converter();
+    fetch("index.md").then((res) => {
+      res.text().then((text) => {
+        var html = converter.makeHtml(text);
+        var div = document.getElementById("body");
+        div.innerHTML = html;
+      });
+    });
+  </script>
+</html>
