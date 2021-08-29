@@ -1,8 +1,19 @@
 var converter = new showdown.Converter();
-fetch("index.md").then((res) => {
-  res.text().then((text) => {
-    var html = converter.makeHtml(text);
-    var div = document.getElementById("body");
-    div.innerHTML = html;
+fetchPage("index.md");
+
+var links = document.getElementById("links");
+links.innerHTML = "";
+for (const link of documents) {
+  links.innerHTML += `<button onclick="fetchPage('markdowns/${link}')">${link}</button>`;
+}
+links.innerHTML += `<button onclick="fetchPage('index.md')">Home</button>`;
+
+function fetchPage(pageMd) {
+  fetch(pageMd).then((res) => {
+    res.text().then((text) => {
+      var html = converter.makeHtml(text);
+      var div = document.getElementById("body");
+      div.innerHTML = html;
+    });
   });
-});
+}
