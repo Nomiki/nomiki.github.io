@@ -1,12 +1,22 @@
 var converter = new showdown.Converter();
-fetchPage("index.md");
 
-var links = document.getElementById("links");
-links.innerHTML = "";
-for (const link of documents) {
-  links.innerHTML += `<button onclick="fetchPage('markdowns/${link}')">${link}</button>`;
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+    fetchPage("index.md");
+    setLinks();
+  },
+  false
+);
+
+function setLinks() {
+  var links = document.getElementById("links");
+  links.innerHTML = "";
+  for (const link of documents) {
+    links.innerHTML += `<button onclick="fetchPage('markdowns/${link}')">${link}</button>`;
+  }
+  links.innerHTML += `<button onclick="fetchPage('index.md')">Home</button>`;
 }
-links.innerHTML += `<button onclick="fetchPage('index.md')">Home</button>`;
 
 function fetchPage(pageMd) {
   fetch(pageMd).then((res) => {
