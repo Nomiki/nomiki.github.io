@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+    <title>Document</title>
+  </head>
+  <style media="screen">
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #000000;
+    }
+    #tsparticles {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+  </style>
+  <body>
+    <div id="tsparticles"></div>
+  </body>
+  <script>
+    const duration = 15 * 10000000000000,
+      animationEnd = Date.now() + duration;
+
+    let skew = 1;
+
+    function randomInRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    (function frame() {
+      const timeLeft = animationEnd - Date.now(),
+        ticks = Math.max(200, 500 * (timeLeft / duration));
+
+      skew = Math.max(0.8, skew - 0.001);
+
+      confetti({
+        particleCount: 1,
+        startVelocity: 0,
+        ticks: ticks,
+        origin: {
+          x: Math.random(),
+          // since particles fall down, skew start toward the top
+          y: Math.random() * skew - 0.2,
+        },
+        shapes: ["emoji"],
+        shapeOptions: {
+          emoji: {
+            // money and panda emojis
+            value: ["💰", "🐼"],
+          },
+        },
+        gravity: randomInRange(0.8, 1),
+        scalar: randomInRange(3, 5),
+        drift: randomInRange(-0.2, 0.2),
+      });
+
+      if (timeLeft > 0) {
+        requestAnimationFrame(frame);
+      }
+    })();
+  </script>
+</html>
