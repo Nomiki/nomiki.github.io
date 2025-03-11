@@ -112,9 +112,16 @@
 
       const PR_RECORD_ID = "recE35zaFDe5Vdhar"; // Replace with actual PR counter record ID
 
+      // Add refresh interval constant
+      const REFRESH_INTERVAL = 60000; // 1 minute in milliseconds
+
       async function fetchCounters() {
         try {
-          loadingElem.style.display = "block";
+          // Don't show loading on auto-refresh
+          const isAutoRefresh = arguments[0]?.isAutoRefresh;
+          if (!isAutoRefresh) {
+            loadingElem.style.display = "block";
+          }
           await Promise.all([fetchCounter(), fetchPrCounter()]);
         } finally {
           loadingElem.style.display = "none";
@@ -212,7 +219,13 @@
         }
       }
 
+      // Initial fetch
       fetchCounters();
+
+      // Set up auto-refresh
+      setInterval(() => {
+        fetchCounters({ isAutoRefresh: true });
+      }, REFRESH_INTERVAL);
 
       btnIncrement.addEventListener("click", async () => {
         let currentCount = parseInt(counterElem.textContent, 10) || 0;
