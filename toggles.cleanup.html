@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Counter with Airtable API</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #f5f5f5;
+      }
+      h1 {
+        color: #333;
+        margin-bottom: 2rem;
+      }
+      .counter-value {
+        font-size: 72px;
+        margin: 20px 0;
+        color: #2c3e50;
+        font-weight: bold;
+      }
+      .button-group {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+      }
+      button {
+        font-size: 32px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: none;
+        background-color: #3498db;
+        color: white;
+        cursor: pointer;
+        transition: transform 0.1s, background-color 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      button:hover {
+        background-color: #2980b9;
+        transform: scale(1.1);
+      }
+      button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+      #loading {
+        font-size: 18px;
+        color: #7f8c8d;
+        margin: 20px 0;
+        display: none;
+      }
+      .counter-container {
+        text-align: center;
+        margin: 2rem 0;
+      }
+      .counter-label {
+        font-size: 24px;
+        color: #666;
+        margin-bottom: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Statistics</h1>
+    <div id="loading">Loading...</div>
+
+    <div class="counter-container">
+      <div class="counter-label">Total PRs</div>
+      <div id="pr-counter" class="counter-value">0</div>
+      <div class="button-group">
+        <button id="pr-decrement">-</button>
+        <button id="pr-increment">+</button>
+      </div>
+    </div>
+
+    <div class="counter-container">
+      <div class="counter-label">Total toggles cleaned</div>
+      <div id="counter" class="counter-value">0</div>
+      <div class="button-group">
+        <button id="decrement">-</button>
+        <button id="increment">+</button>
+      </div>
+    </div>
+
+    <script>
+      const token = localStorage.tokenation;
+      const airtableBaseUrl =
+        "https://api.airtable.com/v0/appZGxED9sytKeHRC/Counter";
+      const airtableGetUrl =
+        "https://api.airtable.com/v0/appZGxED9sytKeHRC/Counter/recBOmovpebvtR1Pf";
+      const airtableHeaders = {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      };
+
+      const counterElem = document.getElementById("counter");
+      const btnIncrement = document.getElementById("increment");
+      const loadingElem = document.getElementById("loading");
+      const btnDecrement = document.getElementById("decrement");
+      const prCounterElem = document.getElementById("pr-counter");
+      const btnPrIncrement = document.getElementById("pr-increment");
+      const btnPrDecrement = document.getElementById("pr-decrement");
+
+      const PR_RECORD_ID = "recE35zaFDe5Vdhar"; // Replace with actual PR counter record ID
+
+      async function fetchCounters() {
+        try {
+          loadingElem.style.display = "block";
+          await Promise.all([fetchCounter(), fetchPrCounter()]);
+        } finally {
+          loadingElem.style.display = "none";
+        }
+      }
+
+      async function fetchCounter() {
+        try {
+          loadingElem.style.display = "block"; // show loading
+          const response = await fetch(airtableGetUrl, {
+            headers: airtableHeaders,
+          });
+          const data = await response.json();
+          console.log(data);
+          const count =
+            data.fields && data.fields.Value ? data.fields.Value : 0;
+          counterElem.textContent = count;
+        } catch (error) {
+          console.error("Error fetching counter:", error);
+        } finally {
+          loadingElem.style.display = "none"; // hide loading
+        }
+      }
+
+      async function fetchPrCounter() {
+        try {
+          const response = await fetch(
+            `https://api.airtable.com/v0/appZGxED9sytKeHRC/Counter/${PR_RECORD_ID}`,
+            { headers: airtableHeaders }
+          );
+          const data = await response.json();
+          const count =
+            data.fields && data.fields.Value ? data.fields.Value : 0;
+          prCounterElem.textContent = count;
+        } catch (error) {
+          console.error("Error fetching PR counter:", error);
+        }
+      }
+
+      async function updateCounter(newCount) {
+        try {
+          btnIncrement.disabled = true; // disable button while updating
+          loadingElem.style.display = "block"; // show loading
+          const response = await fetch(airtableBaseUrl, {
+            method: "PATCH",
+            headers: airtableHeaders,
+            body: JSON.stringify({
+              records: [
+                {
+                  id: "recBOmovpebvtR1Pf",
+                  fields: {
+                    Name: "counter",
+                    Value: newCount,
+                  },
+                },
+              ],
+            }),
+          });
+          const data = await response.json();
+          counterElem.textContent = data.records[0].fields.Value;
+        } catch (error) {
+          console.error("Error updating counter:", error);
+        } finally {
+          loadingElem.style.display = "none"; // hide loading
+          btnIncrement.disabled = false; // re-enable button
+        }
+      }
+
+      async function updatePrCounter(newCount) {
+        try {
+          btnPrIncrement.disabled = true;
+          btnPrDecrement.disabled = true;
+          const response = await fetch(airtableBaseUrl, {
+            method: "PATCH",
+            headers: airtableHeaders,
+            body: JSON.stringify({
+              records: [
+                {
+                  id: PR_RECORD_ID,
+                  fields: {
+                    Name: "pr-counter",
+                    Value: newCount,
+                  },
+                },
+              ],
+            }),
+          });
+          const data = await response.json();
+          prCounterElem.textContent = data.records[0].fields.Value;
+        } catch (error) {
+          console.error("Error updating PR counter:", error);
+        } finally {
+          btnPrIncrement.disabled = false;
+          btnPrDecrement.disabled = false;
+        }
+      }
+
+      fetchCounters();
+
+      btnIncrement.addEventListener("click", async () => {
+        let currentCount = parseInt(counterElem.textContent, 10) || 0;
+        const newCount = currentCount + 1;
+        counterElem.textContent = newCount;
+        await updateCounter(newCount);
+      });
+
+      // Added minus button event listener
+      btnDecrement.addEventListener("click", async () => {
+        let currentCount = parseInt(counterElem.textContent, 10) || 0;
+        const newCount = currentCount - 1;
+        counterElem.textContent = newCount;
+        await updateCounter(newCount);
+      });
+
+      btnPrIncrement.addEventListener("click", async () => {
+        let currentCount = parseInt(prCounterElem.textContent, 10) || 0;
+        const newCount = currentCount + 1;
+        prCounterElem.textContent = newCount;
+        await updatePrCounter(newCount);
+      });
+
+      btnPrDecrement.addEventListener("click", async () => {
+        let currentCount = parseInt(prCounterElem.textContent, 10) || 0;
+        const newCount = currentCount - 1;
+        prCounterElem.textContent = newCount;
+        await updatePrCounter(newCount);
+      });
+    </script>
+  </body>
+</html>
