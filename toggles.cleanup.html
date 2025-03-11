@@ -35,7 +35,7 @@
         height: 60px;
         border-radius: 50%;
         border: none;
-        background-color: #3498db;
+        background-color: #e91e63; /* Changed to pink */
         color: white;
         cursor: pointer;
         transition: transform 0.1s, background-color 0.3s;
@@ -44,7 +44,7 @@
         justify-content: center;
       }
       button:hover {
-        background-color: #2980b9;
+        background-color: #c2185b; /* Darker pink on hover */
         transform: scale(1.1);
       }
       button:disabled {
@@ -91,6 +91,15 @@
       </div>
     </div>
 
+    <div class="counter-container">
+      <div class="counter-label">Tested</div>
+      <div id="tested-counter" class="counter-value">0</div>
+      <div class="button-group">
+        <button id="tested-decrement">-</button>
+        <button id="tested-increment">+</button>
+      </div>
+    </div>
+
     <script>
       const token =
         "patkIZmT7zDbCtAK4.6972733ecb407f5bf25d293ba28975b9a2b0ce2421f4a9fced0a25c9f289c8d1";
@@ -110,11 +119,15 @@
       const prCounterElem = document.getElementById("pr-counter");
       const btnPrIncrement = document.getElementById("pr-increment");
       const btnPrDecrement = document.getElementById("pr-decrement");
+      const testedCounterElem = document.getElementById("tested-counter");
+      const btnTestedIncrement = document.getElementById("tested-increment");
+      const btnTestedDecrement = document.getElementById("tested-decrement");
 
-      const PR_RECORD_ID = "recE35zaFDe5Vdhar"; // Replace with actual PR counter record ID
+      const PR_RECORD_ID = "recE35zaFDe5Vdhar";
+      const TESTED_RECORD_ID = "reclfIjzFNOmT3NlU";
 
       // Add refresh interval constant
-      const REFRESH_INTERVAL = 60000; // 1 minute in milliseconds
+      const REFRESH_INTERVAL = 30000; // 30 seconds
 
       async function fetchCounters() {
         try {
@@ -123,7 +136,11 @@
           if (!isAutoRefresh) {
             loadingElem.style.display = "block";
           }
-          await Promise.all([fetchCounter(), fetchPrCounter()]);
+          await Promise.all([
+            fetchCounter(),
+            fetchPrCounter(),
+            fetchTestedCounter(),
+          ]);
         } finally {
           loadingElem.style.display = "none";
         }
@@ -159,6 +176,21 @@
           prCounterElem.textContent = count;
         } catch (error) {
           console.error("Error fetching PR counter:", error);
+        }
+      }
+
+      async function fetchTestedCounter() {
+        try {
+          const response = await fetch(
+            `https://api.airtable.com/v0/appZGxED9sytKeHRC/Counter/${TESTED_RECORD_ID}`,
+            { headers: airtableHeaders }
+          );
+          const data = await response.json();
+          const count =
+            data.fields && data.fields.Value ? data.fields.Value : 0;
+          testedCounterElem.textContent = count;
+        } catch (error) {
+          console.error("Error fetching tested counter:", error);
         }
       }
 
@@ -220,6 +252,35 @@
         }
       }
 
+      async function updateTestedCounter(newCount) {
+        try {
+          btnTestedIncrement.disabled = true;
+          btnTestedDecrement.disabled = true;
+          const response = await fetch(airtableBaseUrl, {
+            method: "PATCH",
+            headers: airtableHeaders,
+            body: JSON.stringify({
+              records: [
+                {
+                  id: TESTED_RECORD_ID,
+                  fields: {
+                    Name: "tested-counter",
+                    Value: newCount,
+                  },
+                },
+              ],
+            }),
+          });
+          const data = await response.json();
+          testedCounterElem.textContent = data.records[0].fields.Value;
+        } catch (error) {
+          console.error("Error updating tested counter:", error);
+        } finally {
+          btnTestedIncrement.disabled = false;
+          btnTestedDecrement.disabled = false;
+        }
+      }
+
       // Initial fetch
       fetchCounters();
 
@@ -255,6 +316,21 @@
         const newCount = currentCount - 1;
         prCounterElem.textContent = newCount;
         await updatePrCounter(newCount);
+      });
+
+      // Add tested counter event listeners
+      btnTestedIncrement.addEventListener("click", async () => {
+        let currentCount = parseInt(testedCounterElem.textContent, 10) || 0;
+        const newCount = currentCount + 1;
+        testedCounterElem.textContent = newCount;
+        await updateTestedCounter(newCount);
+      });
+
+      btnTestedDecrement.addEventListener("click", async () => {
+        let currentCount = parseInt(testedCounterElem.textContent, 10) || 0;
+        const newCount = currentCount - 1;
+        testedCounterElem.textContent = newCount;
+        await updateTestedCounter(newCount);
       });
     </script>
   </body>
