@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Nissan Cohen - Software Engineering Manager" name="description"/>
+<title>Nissan Cohen - CV</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800&display=swap');
+
+/* ── Tokens: light ───────────────────────────────────────────────────── */
+:root {
+  --bg:               #eef1f8;
+  --surface:          #ffffff;
+  --text:             #1a1a2e;
+  --heading:          #0f0f1a;
+  --subtitle:         #4a5068;
+  --muted:            #6b7280;
+  --faint:            #9ca3af;
+  --border:           #e2e5f0;
+  --accent:           #2a5fc4;
+  --accent-2:         #7c3aed;
+  --accent-gradient:  linear-gradient(135deg, #2a5fc4 0%, #7c3aed 100%);
+  --accent-soft:      rgba(42, 95, 196, 0.10);
+  --accent-soft-border: rgba(42, 95, 196, 0.22);
+  --shadow-sm:        0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md:        0 4px 24px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.06);
+  --shadow-lg:        0 8px 48px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.07);
+  --toolbar-bg:       rgba(255,255,255,0.80);
+  --toolbar-border:   rgba(0,0,0,0.08);
+  --bg-gradient:      linear-gradient(135deg, #eef1f8 0%, #f0ecfb 50%, #eef1f8 100%);
+}
+
+/* ── Tokens: dark (system) ───────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:               #07090f;
+    --surface:          #0e1117;
+    --text:             #dde3f0;
+    --heading:          #f0f4ff;
+    --subtitle:         #8892aa;
+    --muted:            #6b7694;
+    --faint:            #4a5270;
+    --border:           #1e2333;
+    --accent:           #5b9aff;
+    --accent-2:         #a78bfa;
+    --accent-gradient:  linear-gradient(135deg, #5b9aff 0%, #a78bfa 100%);
+    --accent-soft:      rgba(91, 154, 255, 0.12);
+    --accent-soft-border: rgba(91, 154, 255, 0.25);
+    --shadow-sm:        0 1px 3px rgba(0,0,0,0.4);
+    --shadow-md:        0 4px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(91,154,255,0.06);
+    --shadow-lg:        0 8px 48px rgba(0,0,0,0.6), 0 0 0 1px rgba(91,154,255,0.08);
+    --toolbar-bg:       rgba(14,17,23,0.85);
+    --toolbar-border:   rgba(91,154,255,0.15);
+    --bg-gradient:      linear-gradient(135deg, #07090f 0%, #0b0a18 50%, #07090f 100%);
+  }
+}
+
+/* ── Tokens: dark (manual) ───────────────────────────────────────────── */
+[data-theme="dark"] {
+  --bg:               #07090f;
+  --surface:          #0e1117;
+  --text:             #dde3f0;
+  --heading:          #f0f4ff;
+  --subtitle:         #8892aa;
+  --muted:            #6b7694;
+  --faint:            #4a5270;
+  --border:           #1e2333;
+  --accent:           #5b9aff;
+  --accent-2:         #a78bfa;
+  --accent-gradient:  linear-gradient(135deg, #5b9aff 0%, #a78bfa 100%);
+  --accent-soft:      rgba(91, 154, 255, 0.12);
+  --accent-soft-border: rgba(91, 154, 255, 0.25);
+  --shadow-sm:        0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md:        0 4px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(91,154,255,0.06);
+  --shadow-lg:        0 8px 48px rgba(0,0,0,0.6), 0 0 0 1px rgba(91,154,255,0.08);
+  --toolbar-bg:       rgba(14,17,23,0.85);
+  --toolbar-border:   rgba(91,154,255,0.15);
+  --bg-gradient:      linear-gradient(135deg, #07090f 0%, #0b0a18 50%, #07090f 100%);
+}
+
+/* ── Tokens: light (manual) ─────────────────────────────────────────── */
+[data-theme="light"] {
+  --bg:               #eef1f8;
+  --surface:          #ffffff;
+  --text:             #1a1a2e;
+  --heading:          #0f0f1a;
+  --subtitle:         #4a5068;
+  --muted:            #6b7280;
+  --faint:            #9ca3af;
+  --border:           #e2e5f0;
+  --accent:           #2a5fc4;
+  --accent-2:         #7c3aed;
+  --accent-gradient:  linear-gradient(135deg, #2a5fc4 0%, #7c3aed 100%);
+  --accent-soft:      rgba(42, 95, 196, 0.10);
+  --accent-soft-border: rgba(42, 95, 196, 0.22);
+  --shadow-sm:        0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md:        0 4px 24px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.06);
+  --shadow-lg:        0 8px 48px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.07);
+  --toolbar-bg:       rgba(255,255,255,0.80);
+  --toolbar-border:   rgba(0,0,0,0.08);
+  --bg-gradient:      linear-gradient(135deg, #eef1f8 0%, #f0ecfb 50%, #eef1f8 100%);
+}
+
+/* ── Reset ───────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Base ────────────────────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  background-image: var(--bg-gradient);
+  background-size: 300% 300%;
+  animation: bgShift 20s ease infinite;
+  transition: color 0.3s;
+  padding-top: 64px;
+  min-height: 100vh;
+}
+
+@keyframes bgShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── Toolbar ─────────────────────────────────────────────────────────── */
+.cv-toolbar {
+  position: fixed;
+  top: 16px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--toolbar-bg);
+  border: 1px solid var(--toolbar-border);
+  border-radius: 50px;
+  padding: 6px 8px 6px 16px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 100;
+  box-shadow: var(--shadow-md);
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+#theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 4px 6px;
+  border-radius: 50px;
+  transition: transform 0.25s, background 0.2s;
+}
+#theme-toggle:hover {
+  transform: scale(1.2) rotate(12deg);
+  background: var(--accent-soft);
+}
+
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: inherit;
+  font-size: 9pt;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 50px;
+  background: var(--accent-gradient);
+  box-shadow: 0 2px 8px var(--accent-soft);
+  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+.download-btn:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px var(--accent-soft);
+  text-decoration: none;
+}
+
+/* ── Page card ───────────────────────────────────────────────────────── */
+.cv-page {
+  max-width: 860px;
+  margin: 28px auto 64px;
+  background: var(--surface);
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  padding: 52px 60px;
+  transition: background 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+/* gradient top border — clipped cleanly by parent border-radius */
+.cv-page::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent-gradient);
+}
+
+/* ── Header ──────────────────────────────────────────────────────────── */
+.cv-header { margin-bottom: 24px; }
+
+.cv-header h1 {
+  font-size: 30pt;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.05;
+  margin-bottom: 6px;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cv-subtitle {
+  font-size: 12pt;
+  font-weight: 500;
+  color: var(--subtitle);
+  margin-bottom: 14px;
+}
+
+.cv-contact { display: flex; flex-direction: row; flex-wrap: wrap; gap: 6px 20px; }
+
+.cv-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10pt;
+  color: var(--muted);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.cv-email:hover { color: var(--text); text-decoration: none; }
+
+.cv-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10pt;
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.cv-link:hover { opacity: 0.75; text-decoration: none; }
+
+.cv-icon { width: 14px; height: 14px; flex-shrink: 0; color: var(--faint); }
+.cv-link .cv-icon { color: var(--accent); }
+
+/* ── Section headings ────────────────────────────────────────────────── */
+h2 {
+  font-size: 8.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--muted);
+  margin-top: 28px;
+  margin-bottom: 14px;
+  padding-bottom: 6px;
+  position: relative;
+  border-bottom: none;
+}
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, var(--accent), var(--accent-2), transparent 70%);
+  opacity: 0.5;
+}
+
+/* ── Job entries ─────────────────────────────────────────────────────── */
+h3 {
+  font-size: 11pt;
+  font-weight: 700;
+  color: var(--heading);
+  margin-top: 18px;
+  margin-bottom: 2px;
+  transition: color 0.2s;
+}
+
+h3 + p em, h3 + em {
+  font-size: 9pt;
+  color: var(--faint);
+  font-style: normal;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+/* ── Lists ───────────────────────────────────────────────────────────── */
+ul { padding-left: 0; margin-top: 6px; margin-bottom: 6px; list-style: none; }
+
+li {
+  margin-bottom: 6px;
+  font-size: 10pt;
+  color: var(--text);
+  line-height: 1.6;
+  padding-left: 14px;
+  position: relative;
+}
+li::before {
+  content: '·';
+  position: absolute;
+  left: 2px;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 14pt;
+  line-height: 1.3;
+}
+
+/* ATS bullet label — pill tag */
+li em:first-child {
+  display: inline-block;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 8pt;
+  letter-spacing: 0.3px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-soft-border);
+  padding: 1px 8px;
+  border-radius: 20px;
+  margin-right: 5px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* ── Skills grid ─────────────────────────────────────────────────────── */
+.skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; }
+.skills-col ul { padding-left: 0; margin-top: 4px; }
+.skills-col li::before { color: var(--accent-2); }
+.skills-col h3 {
+  font-size: 8.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  margin-top: 12px;
+  margin-bottom: 6px;
+}
+
+/* ── Misc ────────────────────────────────────────────────────────────── */
+p strong { font-weight: 600; color: var(--heading); }
+hr { border: none; border-top: 1px solid var(--border); margin: 10px 0; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+h2 + p { font-size: 10.5pt; color: var(--subtitle); line-height: 1.7; }
+
+/* ── Mobile sticky header ────────────────────────────────────────────── */
+.mobile-sticky {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  background: var(--toolbar-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--toolbar-border);
+  padding: 10px 16px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  transform: translateY(-110%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-md);
+}
+
+.mobile-sticky.visible { transform: translateY(0); }
+
+.mobile-sticky-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.mobile-sticky-name {
+  font-size: 11pt;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mobile-sticky-role {
+  font-size: 8.5pt;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mobile-sticky-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+#theme-toggle-sm {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: transform 0.25s;
+}
+#theme-toggle-sm:hover { transform: scale(1.2) rotate(12deg); }
+
+.download-btn-sm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: transform 0.25s, background 0.2s;
+}
+.download-btn-sm:hover {
+  transform: scale(1.2) translateY(1px);
+  background: var(--accent-soft);
+  text-decoration: none;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────── */
+@media (max-width: 700px) {
+  body { padding-top: 0; }
+  .cv-toolbar {
+    padding: 4px 6px;
+    gap: 6px;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .cv-toolbar.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+  }
+  #theme-toggle { font-size: 14px; }
+  .download-btn { padding: 4px 8px; gap: 4px; }
+  .download-btn .btn-label { display: none; }
+  .mobile-sticky { display: flex; }
+  .cv-page { padding: 28px 22px; border-radius: 0; margin: 0; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .cv-contact { flex-direction: column; gap: 8px; }
+}
+</style>
+</head>
+<body>
+<div class="cv-toolbar">
+<button id="theme-toggle" onclick="toggleTheme()">🌙</button>
+<a class="download-btn" download="" href="nissan-engineering-manager.pdf" title="Download PDF">
+<svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="14"><path d="M12 3v13M7 11l5 5 5-5"></path><path d="M5 20h14"></path></svg>
+<span class="btn-label">Download PDF</span>
+</a>
+</div>
+<div class="mobile-sticky" id="mobileSticky">
+<div class="mobile-sticky-text">
+<span class="mobile-sticky-name"></span>
+<span class="mobile-sticky-role"></span>
+</div>
+<div class="mobile-sticky-actions">
+<button id="theme-toggle-sm" onclick="toggleTheme()">🌙</button>
+<a class="download-btn-sm" download="" href="nissan-engineering-manager.pdf" title="Download PDF">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M12 3v13M7 11l5 5 5-5"></path><path d="M5 20h14"></path></svg>
+</a>
+</div>
+</div>
+<div class="cv-page">
+<div class="cv-header">
+<h1>Nissan Cohen</h1>
+<div class="cv-subtitle">Engineering Manager &amp; Tech Lead · Israel</div>
+<div class="cv-contact">
+<span class="cv-link cv-email"><svg class="cv-icon" fill="currentColor" viewbox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg><span>nissanc6@gmail.com</span></span>
+<a class="cv-link" href="https://www.linkedin.com/in/-nomiki"><svg class="cv-icon" fill="currentColor" viewbox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"></path></svg><span>linkedin.com/in/-nomiki</span></a>
+<a class="cv-link" href="https://github.com/Nomiki"><svg class="cv-icon" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"></path></svg><span>github.com/Nomiki</span></a>
+</div>
+</div>
+<h2>Summary</h2>
+<p>Engineering manager with 4+ years leading fullstack teams at high-growth B2B SaaS companies, with a hands-on technical style, spending roughly half my time in the code. Track record of building high-performing teams, shipping AI-powered product features, and driving architectural improvements across complex domains. Focused on growing engineers, raising delivery quality, and aligning technical work with business goals.</p>
+<div class="skills-grid"><div class="skills-col"><h2>Technical Skills</h2>
+<ul>
+<li><strong>Frontend:</strong> Vue.js, React, Svelte, Angular</li>
+<li><strong>Backend:</strong> Node.js, .NET Core, Java, Scala, Ruby</li>
+<li><strong>Databases:</strong> MSSQL, MongoDB, Elasticsearch, Redis</li>
+<li><strong>Infrastructure:</strong> Docker, AWS, RabbitMQ, Kafka</li>
+<li><strong>Other:</strong> Microservices architecture, AI/ML integration (fine-tuned classification, embeddings)</li>
+</ul>
+</div><div class="skills-col"><h2>Management Skills</h2>
+<ul>
+<li>Team leadership &amp; mentorship</li>
+<li>Hiring &amp; team building</li>
+<li>Agile / Scrum delivery</li>
+<li>Cross-functional collaboration (Product, Data)</li>
+<li>Technical architecture &amp; hands-on code review</li>
+<li>Quarterly roadmap planning &amp; stakeholder communication</li>
+</ul>
+</div></div><h2>Experience</h2>
+<h3>Software Engineering Team Lead → <strong>Wix</strong></h3>
+<p><em>August 2025 – Present · Tel Aviv, Israel</em></p>
+<ul>
+<li><em>Team Leadership</em> - Managing a team of 3 developers in the Bookings domain, responsible for core scheduling and appointment product features</li>
+</ul>
+<h3>Software Engineering Team Lead → <strong>Tipalti</strong></h3>
+<p><em>January 2022 – August 2025 · Tel Aviv, Israel</em></p>
+<ul>
+<li><em>Team Leadership</em> - Managed a fullstack team of 8 (6 developers, 2 QA engineers) responsible for core invoice processing workflows</li>
+<li><em>System Architecture</em> - Led the architectural transition from monolith to microservices within the domain; championed and delivered the first Node.js microservice adopted across the engineering group</li>
+<li><em>AI/ML Integration</em> - Drove delivery of two AI-powered product features: a fine-tuned classification model for PO Matching routing, and an embedding-based similarity algorithm that improved automatic PO Matching accuracy</li>
+<li><em>Hiring &amp; Onboarding</em> - Hired multiple engineers onto the team; owned onboarding and training end-to-end to accelerate ramp-up</li>
+<li><em>People Development</em> - Held regular 1-on-1s with all 8 team members focused on personal growth, career progression, and mentorship</li>
+<li><em>Mentorship</em> - Grew two engineers: mentored a senior engineer into a domain lead role, and advanced a junior engineer to mid-level</li>
+<li><em>Cross-functional Collaboration</em> - Collaborated with Product on quarterly roadmap planning and with the Data team on the AI-powered features</li>
+<li><em>Production Ownership</em> - Built a culture of production awareness across the team through a weekly on-call rotation, improved investigation tooling, and JIRA MCPs; personally owned incident triage and customer-facing escalations for the domain</li>
+<li><em>Process Improvement</em> - Established code review standards and feature planning templates to raise consistency and quality across the team</li>
+</ul>
+<h3>Senior Fullstack Developer → <strong>Tipalti</strong></h3>
+<p><em>June 2020 – January 2022 · Tel Aviv, Israel</em></p>
+<ul>
+<li><em>Algorithm Development</em> - Designed and built core PO Matching algorithms and owned the end-to-end UI/UX for the feature</li>
+<li>Delivered several meaningful features across the Invoice journey before transitioning to the team lead role</li>
+</ul>
+<h3>Software Engineer → <strong>Hysolate</strong></h3>
+<p><em>June 2017 – May 2020 · Tel Aviv, Israel</em></p>
+<ul>
+<li>Engineered core components of a hypervisor-based endpoint security product that isolated corporate devices into separate VMs, each with independent network and resource policies</li>
+<li><em>Technical Ownership</em> - Owned the management server, the central admin console for IT teams to configure VM blueprints and device policies at scale</li>
+</ul>
+<h3>Software Engineer &amp; Automation Engineer → <strong>VMware</strong></h3>
+<p><em>March 2015 – June 2017 · Herzliya, Israel</em></p>
+<ul>
+<li>Worked across software engineering and automation engineering roles within VMware's product teams</li>
+</ul>
+<h2>Education</h2>
+<p><strong>Bachelor's Degree, Computer Science</strong>
+The Academic College of Tel-Aviv, Yaffo · 2014 – 2019</p>
+<h2>Languages</h2>
+<p>Hebrew (Native) · English (Full Professional)</p>
+</div>
+<script>
+(function () {
+  const html = document.documentElement;
+
+  function effectiveTheme() {
+    const saved = html.getAttribute('data-theme');
+    if (saved === 'dark' || saved === 'light') return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function syncButtons() {
+    const icon = effectiveTheme() === 'dark' ? '☀️' : '🌙';
+    ['theme-toggle', 'theme-toggle-sm'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.textContent = icon;
+        el.setAttribute('aria-label', effectiveTheme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      }
+    });
+  }
+
+  const saved = localStorage.getItem('cv-theme');
+  if (saved) html.setAttribute('data-theme', saved);
+  syncButtons();
+
+  window.toggleTheme = function () {
+    const next = effectiveTheme() === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('cv-theme', next);
+    syncButtons();
+  };
+
+  // Mobile sticky header
+  window.addEventListener('DOMContentLoaded', function () {
+    const sticky   = document.getElementById('mobileSticky');
+    const cvHeader = document.querySelector('.cv-header');
+    if (!sticky || !cvHeader) return;
+
+    // Populate text from the injected header
+    const nameEl = sticky.querySelector('.mobile-sticky-name');
+    const roleEl = sticky.querySelector('.mobile-sticky-role');
+    if (nameEl) nameEl.textContent = document.querySelector('.cv-header h1')?.textContent || '';
+    if (roleEl) roleEl.textContent = document.querySelector('.cv-subtitle')?.textContent || '';
+
+    const toolbar = document.querySelector('.cv-toolbar');
+    function onScroll() {
+      const scrolled = cvHeader.getBoundingClientRect().bottom < 0;
+      sticky.classList.toggle('visible', scrolled);
+      if (toolbar && window.innerWidth <= 700) {
+        toolbar.classList.toggle('hidden', scrolled);
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+  });
+})();
+</script>
+</body>
+</html>
